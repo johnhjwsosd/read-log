@@ -21,11 +21,11 @@ async function handle(req, res, next, type) {
             if (para) {
                 global.MONGO_DB_CONFIG = para.host;
                 var collectionname = para.tables;
-                var where = para.where;
-                if (where) {
-                    var result = await db.selectData(collectionname, where);
+                var condition = para.condition;
+                if (condition) {
+                    var result = await db.selectDataExtend(collectionname, condition);
                 } else {
-                    var result = await db.selectData(collectionname);
+                    var result = await db.selectDataExtend(collectionname);
                 }
                 data.loglist = result;
             } else {
